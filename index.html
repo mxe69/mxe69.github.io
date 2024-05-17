@@ -112,7 +112,7 @@
 </div>
 <div class="message-container" id="chat-container"></div>
 <div class="input-container">
-    <input type="text" id="user-input" placeholder="type here dumbass" />
+    <label for="user-input"></label><input type="text" id="user-input" placeholder="type here dumbass" />
     <button onclick="sendMessage()">Click To Send The Message Dumbass</button>
 </div>
 
@@ -140,30 +140,44 @@
 
         const botMessage = document.createElement('div');
         botMessage.className = 'message bot';
-        botMessage.textContent = botResponse;
         chatContainer.appendChild(botMessage);
+
+        await typeWriter(botMessage, botResponse);
+        if (userInput.toLowerCase().includes('am i being watched')) {
+            showNotification();
+        }
 
         chatContainer.scrollTop = chatContainer.scrollHeight;
     }
 
     async function generateBotResponse(userInput) {
         userInput = userInput.toLowerCase().trim();
-        if (userInput.includes("guess what")) {
+        const programmingLanguages = ["html", "php", "javascript", "python", "java", "c++", "lua", "ruby", "typescript", "sql", "css"];
+        const triggerWords = ["kys", "bitch", "shut", "fuck", "nigga", "retard"];
+        const triggerResponses = ["guess what tan. thats why u poopoo crap booty face", "you think you're clever?", "wow, very original", "seriously?", "that's not even funny", "you must be proud of yourself", "ok than fuck you bitch"];
+        const goodBoyTriggers = ["am i your good little boy", "good boy"];
+        const goodBoyResponses = ["yes good wittle kwitten 😼", "nigger.", "your a very odd human being", "buddy, if i catch you typing this again im going to tickle your pickle till it jiggles.", "absolutely, my loyal companion"];
+        if (triggerWords.some(word => userInput.includes(word))) {
+            const randomIndex = Math.floor(Math.random() * triggerResponses.length);
+            return triggerResponses[randomIndex];
+        } else if (goodBoyTriggers.some(word => userInput.includes(word))) {
+            const randomIndex = Math.floor(Math.random() * goodBoyResponses.length);
+            return goodBoyResponses[randomIndex];
+        } else if (userInput.includes("guess what")) {
             return "What?";
-        } else if (userInput === "chicken butt") {
+        } else if (programmingLanguages.some(lang => userInput.includes(lang))) {
+            return "im not that smart retard";
+        } else if (userInput.includes("chicken butt")) {
             return await generateChickenButtResponse();
+        } else if (userInput.includes("(with rizz)")) {
+            const ip = await getUserIP();
+            return `Alr bet that lemme pull up ${ip} 😏 (with rizz)`;
         } else {
             return generateRandomResponse();
         }
     }
-
     function generateRandomResponse() {
-        const responses = [
-            "No",
-            "Nuh Uh",
-            "I no no wanna",
-            "Absolutely not"
-        ];
+        const responses = ["No", "Nuh Uh", "I no no wanna", "Absolutely not", "Maybe later", "Ask me again tomorrow", "I'm not sure about that", "Why do you ask?", "Could be", "Perhaps", "Not in a million years", "Definitely not", "I'm thinking... no", "That's not possible", "You wish", "Nah", "I'm too tired for this", "That's a no from me", "Don't count on it", "In your dreams", "Not happening", "Never", "No way", "Fat chance", "I don't think so", "Think again", "Over my dead body", "Forget it", "No chance", "Out of the question", "Nope", "Nay", "Absolutely no way", "You must be kidding", "Not in this lifetime", "No, sir", "I'd rather not", "That's a negative", "Not a chance", "Not even close", "Not today", "Maybe in another life", "Not in a thousand years", "That's not gonna happen", "No can do", "I don't think so, buddy", "Not interested", "Hard pass", "Negative", "A big no", "No, thank you", "No means no", "I'm afraid not", "Nope, sorry", "Unfortunately, no"];
         const randomIndex = Math.floor(Math.random() * responses.length);
         return responses[randomIndex];
     }
@@ -171,10 +185,10 @@
     async function generateChickenButtResponse() {
         try {
             const ip = await getUserIP();
-            return `Nigga im watching you. "${ip}"`;
+            return `Nigga im watching your every step. ${ip}`;
         } catch (error) {
             console.error(error);
-            return "Nigga im watching you. I couldn't get your IP.";
+            return "Nigga im watching your every step. I couldn't get your IP.";
         }
     }
 
@@ -182,6 +196,34 @@
         const response = await fetch('https://api64.ipify.org?format=json');
         const data = await response.json();
         return data.ip;
+    }
+
+    async function typeWriter(element, text) {
+        element.textContent = '';
+        const cursor = document.createElement('span');
+        cursor.className = 'blinking-cursor';
+        cursor.textContent = '|';
+        element.appendChild(cursor);
+
+        for (let i = 0; i < text.length; i++) {
+            element.textContent = element.textContent.slice(0, -1) + text.charAt(i) + '|';
+            await new Promise(resolve => setTimeout(resolve, 50)); // Adjust typing speed here
+        }
+
+        element.textContent = element.textContent.slice(0, -1); // Remove the cursor after typing is complete
+    }
+    function showNotification() {
+        if (!("Notification" in window)) {
+            console.error("This browser does not support desktop notification");
+        } else if (Notification.permission === "granted") {
+            new Notification("You are being watched.");
+        } else if (Notification.permission !== "denied") {
+            Notification.requestPermission().then(function (permission) {
+                if (permission === "granted") {
+                    new Notification("You are being watched.");
+                }
+            });
+        }
     }
 </script>
 </body>
