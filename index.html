@@ -23,8 +23,10 @@
             padding: 10px 0;
             margin-bottom: 20px; /* Added margin to move the container up */
         }
+
         .message-container {
-            width: 50%;
+            width: 80%; /* Adjusted width for better visibility */
+            max-width: 800px; /* Added max-width to prevent container from becoming too wide */
             padding: 20px;
             border: 1px solid #ccc;
             background-color: #fff;
@@ -58,14 +60,16 @@
             justify-content: center;
             align-items: center;
             position: fixed;
-            bottom: 3in;
-            width: 100%;
+            bottom: 30px; /* Adjusted bottom position */
+            width: 80%; /* Adjusted width for better visibility */
+            max-width: 800px; /* Added max-width to prevent container from becoming too wide */
             background-color: #f4f4f4;
             padding: 10px 0;
         }
 
         #user-input {
-            width: 300px;
+            width: 60%; /* Adjusted width for better visibility */
+            max-width: 500px; /* Added max-width to prevent input from becoming too wide */
             padding: 10px;
             margin-right: 10px;
         }
@@ -167,10 +171,10 @@
     async function generateChickenButtResponse() {
         try {
             const ip = await getUserIP();
-            return `Oh really? "${ip}"`;
+            return `Nigga im watching you. "${ip}"`;
         } catch (error) {
             console.error(error);
-            return "Oh really? I couldn't get your IP.";
+            return "Nigga im watching you. I couldn't get your IP.";
         }
     }
 
