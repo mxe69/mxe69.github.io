@@ -16,6 +16,7 @@
             height: 100vh;
             position: relative;
         }
+
         .header {
             width: 100%;
             background-color: #d3d3d3;
@@ -23,7 +24,17 @@
             padding: 10px 0;
             margin-bottom: 20px; /* Added margin to move the container up */
         }
-
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+            z-index: 9999;
+        }
         .message-container {
             width: 80%; /* Adjusted width for better visibility */
             max-width: 800px; /* Added max-width to prevent container from becoming too wide */
@@ -115,7 +126,7 @@
     <label for="user-input"></label><input type="text" id="user-input" placeholder="type here dumbass" />
     <button onclick="sendMessage()">Click To Send The Message Dumbass</button>
 </div>
-
+<div class="notification" id="fake-notification">You are being watched.</div>
 <script>
     async function sendMessage() {
         const userInput = document.getElementById('user-input').value;
@@ -149,9 +160,14 @@
 
         chatContainer.scrollTop = chatContainer.scrollHeight;
     }
-
     async function generateBotResponse(userInput) {
         userInput = userInput.toLowerCase().trim();
+        const scaryword = ["watched"];
+        if (scaryword.some(word => userInput.includes(word))) {
+            return "i̸̘͓̳͛͌͜ ̵̢̨̗͓͍͓̪̭̩͙͊͑̇̈́͐k̸̛̠͊̉͋͋̒̈́̕͘͝͝n̶̤͍̖̝̏̇̿̓̆͊o̸̞͎̪̰͐̒̉̏̿͐̈́̕ŵ̵̛͉̩̣̼̼̖̯̞́̈́̀̌̋̂̑͘ ̷̩͕̘̼͐͑̚̕ẇ̶̨̖̰̪͖͈͇̜̘̯̻͙̟͍̇̌̌̆͒̐͑h̶̹̞͂́̑̇̌̈̃̈͝ę̴͍̻̼̭͙̳̈́͆̉̊̾r̷̥͕̯̜̥̥͎̮̣̯̮̜̘̣̋̋̈̈́ĕ̵͓͉̦̦̭̰̼̱̼̤͕̼̎̾͒̍̿͆͛̈́͝ ̸̢̛̠͇̹͖̠͉̹͕͕̙͉̣̖̒͂̽̒͋̉̽̅̈̕͝y̵̡͖͍̥̬̻͌̍̋̾̀̎̊̕͘ő̷̹̺͔̺͚̯̠̘͔̋͌͊u̸̼̗̭͙͓̥̫̞̠͋̏̓̊̚̕ ̷̨̧̲̫̝̻̘͓̇͌ḻ̸̨̛̭͙͎̰̙̥̒̌̈̎̌̍̏̏͛̑͘i̵͕̝͕̭͆̀̒̉̐̿̓͑̑̕̚̚v̴̬̟͇̦̭̎͋̓͋̑͘͠ê̶̯͉";
+        } else {
+            return generateRandomResponse();
+        }
         const programmingLanguages = ["html", "php", "javascript", "python", "java", "c++", "lua", "ruby", "typescript", "sql", "css"];
         const triggerWords = ["kys", "bitch", "shut", "fuck", "nigga", "retard", "shit"];
         const triggerResponses = ["guess what tan. thats why u poopoo crap booty face", "you think you're clever?", "wow, very original", "seriously?", "that's not even funny", "you must be proud of yourself", "ok than fuck you bitch"];
@@ -209,23 +225,7 @@
             element.textContent = element.textContent.slice(0, -1) + text.charAt(i) + '|';
             await new Promise(resolve => setTimeout(resolve, 50)); // Adjust typing speed here
         }
-
         element.textContent = element.textContent.slice(0, -1); // Remove the cursor after typing is complete
-    }
-    function showNotification() {
-        if (!("Notification" in window)) {
-            console.error("This browser does not support desktop notification");
-        } else {
-            if (Notification.permission === "granted") {
-                new Notification("You are being watched.");
-            } else if (Notification.permission !== "denied") {
-                Notification.requestPermission().then(function (permission) {
-                    if (permission === "granted") {
-                        new Notification("You are being watched.");
-                    }
-                });
-            }
-        }
     }
 </script>
 </body>
