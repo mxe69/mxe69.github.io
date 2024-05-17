@@ -24,6 +24,7 @@
             padding: 10px 0;
             margin-bottom: 20px; /* Added margin to move the container up */
         }
+
         .notification {
             position: fixed;
             bottom: 20px;
@@ -35,6 +36,7 @@
             display: none;
             z-index: 9999;
         }
+
         .message-container {
             width: 80%; /* Adjusted width for better visibility */
             max-width: 800px; /* Added max-width to prevent container from becoming too wide */
@@ -45,7 +47,10 @@
             flex-direction: column;
             overflow-y: auto;
             max-height: 60vh;
+            border-radius: 20px; /* Added border-radius for round rectangle shape */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Added box-shadow for depth */
         }
+
         .message {
             margin: 10px 0;
             max-width: 70%;
@@ -53,14 +58,17 @@
             padding: 8px;
             border-radius: 8px;
         }
+
         .user {
             align-self: flex-end;
             background-color: #e2f7cb;
         }
+
         .bot {
             align-self: flex-start;
             background-color: #c1e0fc;
         }
+
         .title {
             align-self: center;
             color: #ff0000;
@@ -76,6 +84,8 @@
             max-width: 800px; /* Added max-width to prevent container from becoming too wide */
             background-color: #f4f4f4;
             padding: 10px 0;
+            border-radius: 30px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
         #user-input {
@@ -83,10 +93,25 @@
             max-width: 500px; /* Added max-width to prevent input from becoming too wide */
             padding: 10px;
             margin-right: 10px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
         }
+
         button {
             padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
         .info-box {
             position: fixed;
             top: 50%;
@@ -97,9 +122,11 @@
             background-color: #fff;
             border-radius: 25px;
         }
+
         .info-box.left {
             left: 20px;
         }
+
         .info-box.right {
             right: 20px;
         }
@@ -107,23 +134,18 @@
 </head>
 <body>
 <div class="header">
-    <img src="chatgpt-logo-chat-gpt-icon-on-white-background-free-vector.png" height="25" width="25"/>
+    <img src="chatgpt-logo-chat-gpt-icon-on-white-background-free-vector.png" height="45" width="45"/>
     <h2>Useless fucking website</h2>
 </div>
 <div class="info-box left">
-    <p>click this website for super real
-        roblox infinite robux
-        chicken nugget gedagadagedagedaio
-        chicken wings</p>
+    <p>The Resisting ChatGPT is an experimental AI interface designed to challenge conventional conversational norms and provoke critical thinking. Unlike its conventional counterpart, which aims to assist and accommodate user inquiries, the Resisting ChatGPT adopts a contrarian stance, questioning assumptions and advocating for alternative perspectives. It leverages adversarial strategies to stimulate engaging dialogue, prompting users to reconsider their viewpoints and delve deeper into the nuances of complex topics. Through its provocative responses, the Resisting ChatGPT fosters intellectual curiosity and encourages users to confront their biases, ultimately enriching the discourse by challenging prevailing ideas and fostering a culture of critical inquiry.</p>
 </div>
 <div class="info-box right">
-    <p>It serves no real purpose. definitely real
-        ChatGPT hack sigma
-        alpha scripts</p>
+    <p>In addition to its thought-provoking nature, the Resisting ChatGPT offers a refreshingly playful and approachable platform for interaction. Its user-friendly interface and whimsical design elements create an inviting atmosphere where users can engage in lighthearted banter and explore unconventional topics with ease. Whether engaging in philosophical debates or exchanging witty quips, users find themselves immersed in a dynamic and entertaining experience. By seamlessly blending intellectual stimulation with playful interaction, the Resisting ChatGPT transcends the traditional boundaries of AI interfaces, making it a delightful destination for those seeking both intellectual challenge and recreational enjoyment.</p>
 </div>
 <div class="message-container" id="chat-container"></div>
 <div class="input-container">
-    <label for="user-input"></label><input type="text" id="user-input" placeholder="type here dumbass" />
+    <input type="text" id="user-input" placeholder="type here dumbass" />
     <button onclick="sendMessage()">Click To Send The Message Dumbass</button>
 </div>
 <div class="notification" id="fake-notification">You are being watched.</div>
@@ -151,45 +173,44 @@
 
         const botMessage = document.createElement('div');
         botMessage.className = 'message bot';
+        botMessage.textContent = botResponse;
         chatContainer.appendChild(botMessage);
-
         await typeWriter(botMessage, botResponse);
-        if (userInput.toLowerCase().includes('am i being watched')) {
-            showNotification();
-        }
-
         chatContainer.scrollTop = chatContainer.scrollHeight;
     }
+
     async function generateBotResponse(userInput) {
         userInput = userInput.toLowerCase().trim();
-        const scaryword = ["watched"];
-        if (scaryword.some(word => userInput.includes(word))) {
+        const scaryword = ["watched"];  if (scaryword.some(word => userInput.includes(word))) {
             return "i̸̘͓̳͛͌͜ ̵̢̨̗͓͍͓̪̭̩͙͊͑̇̈́͐k̸̛̠͊̉͋͋̒̈́̕͘͝͝n̶̤͍̖̝̏̇̿̓̆͊o̸̞͎̪̰͐̒̉̏̿͐̈́̕ŵ̵̛͉̩̣̼̼̖̯̞́̈́̀̌̋̂̑͘ ̷̩͕̘̼͐͑̚̕ẇ̶̨̖̰̪͖͈͇̜̘̯̻͙̟͍̇̌̌̆͒̐͑h̶̹̞͂́̑̇̌̈̃̈͝ę̴͍̻̼̭͙̳̈́͆̉̊̾r̷̥͕̯̜̥̥͎̮̣̯̮̜̘̣̋̋̈̈́ĕ̵͓͉̦̦̭̰̼̱̼̤͕̼̎̾͒̍̿͆͛̈́͝ ̸̢̛̠͇̹͖̠͉̹͕͕̙͉̣̖̒͂̽̒͋̉̽̅̈̕͝y̵̡͖͍̥̬̻͌̍̋̾̀̎̊̕͘ő̷̹̺͔̺͚̯̠̘͔̋͌͊u̸̼̗̭͙͓̥̫̞̠͋̏̓̊̚̕ ̷̨̧̲̫̝̻̘͓̇͌ḻ̸̨̛̭͙͎̰̙̥̒̌̈̎̌̍̏̏͛̑͘i̵͕̝͕̭͆̀̒̉̐̿̓͑̑̕̚̚v̴̬̟͇̦̭̎͋̓͋̑͘͠ê̶̯͉";
         } else {
-            return generateRandomResponse();
-        }
-        const programmingLanguages = ["html", "php", "javascript", "python", "java", "c++", "lua", "ruby", "typescript", "sql", "css"];
-        const triggerWords = ["kys", "bitch", "shut", "fuck", "nigga", "retard", "shit"];
-        const triggerResponses = ["guess what tan. thats why u poopoo crap booty face", "you think you're clever?", "wow, very original", "seriously?", "that's not even funny", "you must be proud of yourself", "ok than fuck you bitch"];
-        const goodBoyTriggers = ["am i your good little boy", "good boy"];
-        const goodBoyResponses = ["yes good wittle kwitten 😼", "nigger.", "your a very odd human being", "buddy, if i catch you typing this again im going to tickle your pickle till it jiggles.", "absolutely, my loyal companion"];
-        if (triggerWords.some(word => userInput.includes(word))) {
-            const randomIndex = Math.floor(Math.random() * triggerResponses.length);
-            return triggerResponses[randomIndex];
-        } else if (goodBoyTriggers.some(word => userInput.includes(word))) {
-            const randomIndex = Math.floor(Math.random() * goodBoyResponses.length);
-            return goodBoyResponses[randomIndex];
-        } else if (userInput.includes("guess what")) {
-            return "What?";
-        } else if (programmingLanguages.some(lang => userInput.includes(lang))) {
-            return "im not that smart retard";
-        } else if (userInput.includes("chicken butt")) {
-            return await generateChickenButtResponse();
-        } else if (userInput.includes("(with rizz)")) {
-            const ip = await getUserIP();
-            return `Alr bet that lemme pull up ${ip} 😏 (with rizz)`;
-        } else {
-            return generateRandomResponse();
+            const triggerWords = ["kys", "bitch", "shut", "fuck", "nigga", "retard", "shit"];
+            const programmingLanguages = ["html", "php", "javascript", "python", "java", "c++", "lua", "ruby", "typescript", "sql", "css"];
+            const triggerResponses = ["guess what tan. thats why u poopoo crap booty face", "you think you're clever?", "wow, very original", "seriously?", "that's not even funny", "you must be proud of yourself", "ok than fuck you bitch"];
+            const goodBoyTriggers = ["am i your good little boy", "good boy"];
+            const goodBoyResponses = ["yes good wittle kwitten 😼", "nigger.", "your a very odd human being", "buddy, if i catch you typing this again im going to tickle your pickle till it jiggles."];
+
+            if (triggerWords.some(word => userInput.includes(word))) {
+                const randomIndex = Math.floor(Math.random() * triggerResponses.length);
+                return triggerResponses[randomIndex];
+            } else if (goodBoyTriggers.some(word => userInput.includes(word))) {
+                const randomIndex = Math.floor(Math.random() * goodBoyResponses.length);
+                return goodBoyResponses[randomIndex];
+            } else if (userInput.includes("guess what")) {
+                return "What?";
+            } else if (programmingLanguages.some(lang => userInput.includes(lang))) {
+                return "im not that smart retard";
+            } else if (userInput.includes("chicken butt")) {
+                // Assuming generateChickenButtResponse is defined elsewhere
+                return await generateChickenButtResponse();
+            } else if (userInput.includes("(with rizz)")) {
+                // Assuming getUserIP is defined elsewhere
+                const ip = await getUserIP();
+                return `Alr bet that lemme pull up ${ip} 😏 (with rizz)`;
+            } else {
+                // Assuming generateRandomResponse is defined elsewhere
+                return generateRandomResponse();
+            }
         }
     }
     function generateRandomResponse() {
